@@ -1,4 +1,4 @@
-![](https://github.com/lisabroadhead/lisabroadhead/blob/main/lisa.png)
+![](https://github.com/lisabroadhead/calculator/blob/main/calculator.png)
 
 # calculator
 Keeping my JS skills sharp by building a calculator
