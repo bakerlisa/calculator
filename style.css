@@ -1,65 +1,30 @@
-body{background-color:black;}
-
-h1{
-  color:#F2C777; 
-  text-align:center;
-  font-size:45px;
+:root{
+    --white:#fff;
+    --black:#000;
+    --pink:#D94389;
+    --dk-pink:#BF3668;
+    --yellow:#F2A25C;
+    --salmon:#F2784B;
+    --orange:#F23A29;
+    --cream:#F4CBA6;
 }
+*{padding: 0;margin: 0;box-sizing: border-box; font-family: 'IBM Plex Sans Thai Looped', sans-serif;}
 
-#hidden-div{
-  color:#F2C777;
-}
+button,p,li,a{font-size: 20px;}
 
-.calculator-layout{
-  max-width:500px;
-  margin:0 auto;
-  color:#F2C777;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
+button{border:none; border-radius:5px;  opacity: 1;  transition: all .25s ease-in; box-shadow: 2px 2px 13px 0px rgba(0,0,0,0) inset;}
+    button:hover{cursor: pointer; box-shadow: 2px 2px 13px 0px rgba(0,0,0,0.3) inset;  opacity: .8; transition: all .25s ease-in; }
 
-.calculator-layout div{
-  background-color:#092140;
-  border:solid 1px #F2C777;   
-  padding:20px 10px;
-  text-align: center;
-}
+.row{display: flex; align-items: center; justify-content: space-between; gap:5px;}
 
-.calculator-layout div:hover{
-  cursor: pointer;
-  background-color: rgba(9, 33, 64, .7);
-}
+h1{text-align: center; padding-top: 25px; font-weight: 900; color:var(--black);}
+#calculator{max-width:300px; margin: 0 auto;}
+#calculator button:not(#equals){padding:15px; margin: 0px; width:calc(100% - 5px); margin-bottom: 5px; }
+    #calculator .operator{background-color:var(--orange); color:var(--white); }
+    #calculator #equals{margin-bottom: 5px; padding:15px; width: 100%; background-color:var(--salmon); color:var(--black); }
+    #calculator .clear{background-color:var(--cream);}
+    #calculator button:not(#equals):not(.operator):not(.clear){background-color:var(--yellow);}
 
-.calculator-layout #answer{
-  grid-column-start: 1; 
-  grid-column-end: 5;
-  text-align:right;
-  font-size:25px;
-  min-height:25px;
-}
+#display{padding: 15px 0; margin-top: 25px;font-size: 20px;font-weight: 900; height: 63px;}
 
-.calculator-layout #answer:hover{
-  background-color:#092140;
-  cursor: default;
-}
-
-.calculator-layout .zero{
-  grid-column-start: 1; 
-  grid-column-end: 4;
-}
-
-.calculator-layout .operator{
-  background-color:#3E608C;
-}
-
-.calculator-layout .operator:hover{
-  background-color: rgba(62, 96, 140, .7);
-}
-
-.calculator-layout  .non-number-operator{
-  background-color:#092E46;
-}
-
-.calculator-layout  .non-number-operator:hover{
-  background-color:rgba(9, 46, 70, .7);
-}
+#equals{width: 100%;}
