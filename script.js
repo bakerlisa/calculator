@@ -1,69 +1,74 @@
-var justEqualed = false;
+// initially everything is zero
+// ********** VARS **********
+// as the user inputs numbers its added here
+var calcArr1 = [];
+var calcArr2 = [];
+//actual nums / opertors for problem saved
+var operatorArray = [];
+// clears the display
+var display = document.querySelector('#display');
 
-
-
-function calculator(event){
-	var lastClickedElement = document.getElementById("answer").innerHTML.slice(-1);
-	var show = event.getAttribute("data-tag");
-
-	if(justEqualed == true ){	
-		if(show == '/' || show == '*' || show == '+' || show == '-' || show == '%' || show === ''){
-			justEqualed = false;
-		}else{	
-			var getElement = '';
-			document.getElementById("answer").innerHTML = '';	
-			justEqualed = false;
-		}	
-	}else{
-		var getElement = document.getElementById("answer").innerHTML;
-	}	
-	
-
-	if(lastClickedElement == '/' || lastClickedElement == '*' || lastClickedElement == '+' || lastClickedElement == '-' || lastClickedElement == '%' || lastClickedElement === '' ){
-		lastClickedElementVal = true;
-	}else{
-		lastClickedElementVal = false;
-	}
-
-	if(show == '/' || show == '*' || show == '+' || show == '-' || show == '%' || show === ''){
-		showVal = true;
-	}else{
-		showVal = false;
-	}
-	
-	if((showVal == true) && (lastClickedElementVal == true)){
-	}else{
-		document.getElementById('answer').innerHTML += show;	
-	}
-				
-	return justEqualed;
+// ********** PRESS **********
+function press(button){
+    // operatorArray empty, add to val calcArr1
+    if(operatorArray.length === 0){
+        //keeps adding numbers to the end till we hit an operator
+        calcArr1 += button;
+        //what shows up visually on the screen
+        display.innerText = calcArr1;
+    }else{
+        //else add to calcArr2
+        //add numbers on the end till we hit the equals button
+        calcArr2 += button;
+        //what shows up visually on the screen
+        display.innerText = `${calcArr1}${operatorArray[1]}${calcArr2} = `;
+    }
+    
 }
 
-//if you end with an operator 
-
-function equals(event){
-	var lastClickedElement = document.getElementById("answer").innerHTML.slice(-1);
-	var getElement = document.getElementById("answer").innerHTML;
-	if(lastClickedElement == '/' || lastClickedElement == '*' || lastClickedElement == '+' || lastClickedElement == '-' || lastClickedElement == '%' || lastClickedElement === '' ){
-
-	}else{	
-		justEqualed = true;
-		var total = eval(getElement);
-		document.getElementById('answer').innerHTML = total;
-		return justEqualed;
-	}	
-
-	
+// ********** SETOP - operation **********
+function setOP(opt){
+    //checks the first numbers placement as well as length to make sure its set
+    //only set one opt value at a time
+    if(calcArr1.length > 0 && operatorArray.length < 1){
+        //pushes calcArr1 to operation array
+        operatorArray.splice(0,1,calcArr1);
+        //pushes in the operator at the right place
+        operatorArray.splice(1,1,opt);
+        display.innerText += opt;
+    }
 }
 
-function clearAll(event){
-	var getElement = document.getElementById("answer").innerHTML;
-	justEqualed = false;
-	getElement.innerHTML = "";
-	document.getElementById('answer').innerHTML = '';	
+// ********** CALCULATES **********
+function calculate(){
+    if(calcArr2.length > 0){
+        operatorArray.splice(2,1,calcArr2);
 
-	return justEqualed;
+    var operationClacA = eval(parseFloat(operatorArray[0]) + operatorArray[1]+parseFloat(operatorArray[2]));
+    
+    // rounds to 2 deciamls with toFixed
+    var operationClac = operationClacA.toFixed(2);
+
+    document.querySelector('#display').innerHTML = "";
+    document.querySelector('#display').innerHTML = `${operatorArray[0]}${operatorArray[1]}${operatorArray[2]} = <span> ${operationClac} </span>`;
+
+    // sets calcArr1 (which is always in the 0 position) to our total, then it clears eveything else. Length should be no longer than 3 at any given time
+    calcArr1 = [];
+    calcArr2 = [];
+    operatorArray = [];
+    calcArr1.splice(0,1,operationClac);
+
+    }else{
+        // if there isn't a second value in the calcArr2[2] placement - don't do anything
+        return;
+    }    
 }
 
-//make object oriented - make sure you're thinking about objects in the right way
-
+// ********** CLEARS **********
+function clr(){
+    document.querySelector("#display").innerHTML = "";
+    
+    calcArr1 = [];
+    calcArr2 = [];
+    operatorArray = [];
+}
