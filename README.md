@@ -1,4 +1,4 @@
-# calculator
+# Calculator
 Keeping my JS skills sharp by building a simple 4 function calculator
 
 languages: JS, HTML, CSS
